@@ -8,8 +8,8 @@ const copy = {fromname, from, to
 			break
 		| `std.Ok sz:
 			match std.writeall(to, buf[0:sz])
-			| (_, `std.Some _):
-				std.fatal("writing output failed\n")
+			| (_, `std.Some e):
+				std.fatal("writing output failed: {}\n", e)
 			| _:
 			;;
 		| `std.Fail e:
