@@ -9,9 +9,9 @@ const copy = {fromname, from, to
 				->
 			;;
 			match std.writeall(to, buf[0:sz])
-			| `std.Ok _ :
-			| `std.Fail _:
+			| (_, `std.Some _):
 				std.fatal("writing output failed\n")
+			| _:
 			;;
 		| `std.Fail _:
 			std.fatal("error reading input {}\n", fromname)
