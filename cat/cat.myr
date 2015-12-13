@@ -1,0 +1,35 @@
+use std
+
+const copy = {fromname, from, to
+	var buf : byte[4096]
+	while true
+		match std.read(from, buf[:])
+		| `std.Ok sz:
+			if sz == 0 
+				->
+			;;
+			match std.writeall(to, buf[0:sz])
+			| `std.Ok _ :
+			| `std.Fail _:
+				std.fatal("writing output failed\n")
+			;;
+		| `std.Fail _:
+			std.fatal("error reading input {}\n", fromname)
+		;;
+	;;
+}
+
+const main = {args : byte[:][:]
+	if args.len == 1 
+		copy("stdin", 0, 1)
+		-> 
+	;;
+	for file in args[1:]
+		match std.open(file, std.Ordonly)
+		| `std.Ok fd :
+			copy(file, fd, 1)
+		| `std.Fail _ : 
+			std.fatal("error opening {}\n", file)
+		;;
+	;;
+}
