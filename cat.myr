@@ -4,17 +4,16 @@ const copy = {fromname, from, to
 	var buf : byte[4096]
 	while true
 		match std.read(from, buf[:])
+		| `std.Ok 0: 
+			break
 		| `std.Ok sz:
-			if sz == 0 
-				->
-			;;
 			match std.writeall(to, buf[0:sz])
 			| (_, `std.Some _):
 				std.fatal("writing output failed\n")
 			| _:
 			;;
-		| `std.Fail _:
-			std.fatal("error reading input {}\n", fromname)
+		| `std.Fail e:
+			std.fatal("error reading input {}: {}\n", fromname, e)
 		;;
 	;;
 }

@@ -1,1 +1,4 @@
-bin bin/cat = cat/cat.myr;;
+bin bin/cat = cat.myr;;
+bin bin/false = false.myr;;
+bin bin/true = true.myr;;
+bin bin/sort = sort.myr;;

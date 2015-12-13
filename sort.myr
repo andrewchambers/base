@@ -1,0 +1,31 @@
+use std
+use bio
+
+const main = {
+	var bufin
+	var n
+	var lns : byte[:][:] 
+
+	n = 0
+	lns = std.slalloc(1024)
+	bufin = bio.mkfile(0, bio.Rd)
+	while true
+		match bio.readln(bufin)
+		| `bio.Ok ln:
+			lns[n++] = ln
+			if n == lns.len
+				lns = std.slgrow(lns, lns.len * 2)
+			;;
+		| `bio.Eof:
+			break
+		| `bio.Err e:
+			std.fatal("error reading input {}\n", e)
+		;;
+	;;
+	std.sort(lns, std.strcmp)
+	for ln in lns[0:n]
+		if std.put("{}\n", ln) != ln.len + 1
+			std.fatal("error writing output{}\n")
+		;;
+	;;
+}
