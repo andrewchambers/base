@@ -22,8 +22,9 @@ const main = {
 			std.fatal("error reading input {}\n", e)
 		;;
 	;;
+	lns = lns[:n]
 	std.sort(lns, std.strcmp)
-	for ln in lns[0:n]
+	for ln in lns
 		if std.put("{}\n", ln) != ln.len + 1
 			std.fatal("error writing output{}\n")
 		;;
