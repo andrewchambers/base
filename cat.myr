@@ -21,7 +21,7 @@ const copy = {fromname, from, to
 const main = {args : byte[:][:]
 	if args.len == 1 
 		copy("stdin", 0, 1)
-		-> 
+		-> void
 	;;
 	for file in args[1:]
 		match std.open(file, std.Ordonly)
